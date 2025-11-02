@@ -1,0 +1,16 @@
+[versions]
+compileSdk="36"
+minSdk="14"
+maxSdk="36"
+
+agp = "8.13.0"
+appcompat = "1.7.1"
+androidxcore = "1.17.0"
+
+
+[libraries]
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidxcore = { group = "androidx.core", name = "core", version.ref = "androidxcore" }
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
