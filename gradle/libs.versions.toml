@@ -1,6 +1,6 @@
 [versions]
 compileSdk="36"
-minSdk="14"
+minSdk="21"
 maxSdk="36"
 
 agp = "8.13.0"
