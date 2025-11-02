@@ -14,9 +14,7 @@ import android.os.Debug;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.os.SystemClock;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
-import android.support.annotation.IntDef;
+
 import android.util.AttributeSet;
 import android.view.HapticFeedbackConstants;
 import android.view.MotionEvent;
@@ -41,6 +39,10 @@ import static com.andrognito.patternlockview.PatternLockView.AspectRatio.ASPECT_
 import static com.andrognito.patternlockview.PatternLockView.PatternViewMode.AUTO_DRAW;
 import static com.andrognito.patternlockview.PatternLockView.PatternViewMode.CORRECT;
 import static com.andrognito.patternlockview.PatternLockView.PatternViewMode.WRONG;
+
+import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
+import androidx.annotation.IntDef;
 
 /**
  * Displays a powerful, customizable and Material Design complaint pattern lock in the screen which

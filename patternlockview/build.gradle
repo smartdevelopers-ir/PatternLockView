@@ -1,4 +1,10 @@
-apply plugin: 'com.android.library'
+
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+    id 'signing'
+//    alias(libs.plugins.versions) // Access version catalog in buildSrc for plugin
+}
 
 ext {
     bintrayRepo = 'maven'
@@ -14,7 +20,7 @@ ext {
     siteUrl = 'https://github.com/aritraroy/PatternLockView'
     gitUrl = 'https://github.com/aritraroy/PatternLockView.git'
 
-    libraryVersion = '1.0.0'
+    libraryVersion = '1.1.0'
 
     developerId = 'aritraroy'
     developerName = 'Aritra Roy'
@@ -23,20 +29,78 @@ ext {
     licenseName = 'The Apache Software License, Version 2.0'
     licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
     allLicenses = ["Apache-2.0"]
+
 }
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-
+    compileSdkVersion Integer.parseInt(libs.versions.compileSdk.get())
+    namespace "com.andrognito.patternlockview"
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode Integer.parseInt(project.VERSION_CODE)
-        versionName project.VERSION_NAME
+        minSdkVersion libs.versions.minSdk.get()
+        targetSdkVersion libs.versions.maxSdk.get()
+        versionCode 100
+        versionName "1.1.0"
+    }
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
     }
 }
+group = 'com.andrognito.patternlockview'
+version = '1.1.0'
 
 dependencies {
     implementation libs.appcompat
     
+}
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+
+                from components.release
+
+                artifactId = artifact
+
+                pom {
+                    name = libraryName
+                    description = libraryDescription
+                    url = siteUrl
+
+                    licenses {
+                        license {
+                            name = 'The Apache License, Version 2.0'
+                            url = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                        }
+                    }
+                    developers {
+                        developer {
+                            id = developerId
+                            name = developerName
+                            email = developerEmail
+                        }
+                    }
+                    scm {
+                        connection = 'scm:git:git://github.com/aritraroy/PatternLockView.git'
+                        developerConnection = 'scm:git:ssh://github.com/aritraroy/PatternLockView.git'
+                        url = 'http://github.com/aritraroy/PatternLockView'
+                    }
+
+                }
+            }
+        }
+        repositories {
+            maven {
+                // change URLs to point to your repos, e.g. http://my.org/repo
+                def releasesRepoUrl = "${layout.buildDirectory.asFile.get()}/repos/releases"
+                def snapshotsRepoUrl = "${layout.buildDirectory.asFile.get()}/repos/snapshots"
+                url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
+            }
+        }
+    }
+}
+
+signing {
+    sign configurations.archives
 }

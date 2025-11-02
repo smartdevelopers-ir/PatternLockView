@@ -1,38 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-pluginManagement {
-    repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
-        mavenCentral()
-        gradlePluginPortal()
-        maven { url 'https://jitpack.io' }
-    }
-}
-dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-    repositories {
-        google()
-        mavenCentral()
-        maven { url 'https://jitpack.io' }
-        mavenLocal()
-    }
+plugins {
+    alias(libs.plugins.android.application) apply false
 }
 
-ext {
-    minSdkVersion = 14
-    targetSdkVersion = 36
-    compileSdkVersion = 36
 
-    // dependencies
-    
-    rxJava = 'io.reactivex.rxjava2:rxjava:2.0.2'
-    rxAndroid = 'io.reactivex.rxjava2:rxandroid:2.0.0'
-}
 
 task clean(type: Delete) {
     delete rootProject.buildDir

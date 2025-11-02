@@ -1,20 +1,20 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion Integer.parseInt(libs.versions.compileSdk.get())
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion libs.versions.minSdk.get()
+        targetSdkVersion libs.versions.maxSdk.get()
         versionCode Integer.parseInt(project.VERSION_CODE)
         versionName project.VERSION_NAME
     }
+    namespace "com.andrognito.patternlockdemo"
 }
 
 dependencies {
-    compile project(':patternlockview')
-    compile project(':patternlockview-reactive')
-    compile rootProject.ext.supportV7
-    compile rootProject.ext.rxJava
+    implementation project(':patternlockview')
+    implementation libs.appcompat
+    implementation libs.androidxcore
+
 }
